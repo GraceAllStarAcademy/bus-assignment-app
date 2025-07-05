@@ -1,6 +1,8 @@
 import express from 'express';
 import session from 'express-session';
 import fs from 'fs/promises';
+import cors from 'cors';
+app.use(cors());
 const app = express();
 app.use(express.json());
 app.use(session({ secret: 'replace-with-strong-key', resave: false, saveUninitialized: true }));

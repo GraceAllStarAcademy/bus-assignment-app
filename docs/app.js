@@ -107,7 +107,7 @@ renderStudentButtons();
       document.getElementById('loginError').textContent = 'Select your name and enter 4 digits';
       return;
     }
-    const res = await fetch('/api/login', {
+    const res = await fetch('https://bus-api-kmc2.onrender.com/api/login', {
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body: JSON.stringify({ id: selectedStudentId, passcode })

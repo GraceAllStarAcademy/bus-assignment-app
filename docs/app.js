@@ -122,7 +122,7 @@ renderStudentButtons();
 async function loadDashboard() {
   document.getElementById('login').style.display = 'none';
   document.getElementById('dashboard').style.display = '';
-  const { buses, yourBusId } = await (await fetch('/api/state')).json();
+  const { buses, yourBusId } = await (await fetch('https://bus-api-kmc2.onrender.com//api/state')).json();
   const container = document.getElementById('buses');
   container.innerHTML = '';
   buses.forEach(b => {
@@ -141,7 +141,7 @@ async function loadDashboard() {
 }
 
 window.assign = async busId => {
-  const res = await fetch('/api/assign', {
+  const res = await fetch('https://bus-api-kmc2.onrender.com//api/assign', {
     method:'POST', headers:{'Content-Type':'application/json'},
     body: JSON.stringify({ busId })
   });

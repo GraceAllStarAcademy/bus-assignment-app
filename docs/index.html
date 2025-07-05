@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bus Assignment Login</title>
+  <!-- Link to external stylesheet -->
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+  <div id="login">
+    <h2>Pick Your Name</h2>
+    <div id="studentList">
+      <!-- JS will inject 35 buttons here -->
+      <div id="passcodeForm" style="display:none">
+        <h3 id="welcome"></h3>
+        <input id="passcode" type="password" maxlength="4" placeholder="MMDD only" />
+        <button id="btnLogin">Login</button>
+        <p id="loginError" style="color:red"></p>
+      </div>
+    </div>
+  </div>
+  
+  <div id="dashboard" style="display:none">
+    <h2>Choose Your Bus</h2>
+    <div id="buses"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,236 @@
+{
+  "students": [
+    {
+      "id": 1,
+      "name": "尤嘉豪",
+      "passcode": "1005",
+      "busId": null
+    },
+    {
+      "id": 2,
+      "name": "王浩羲",
+      "passcode": "1110",
+      "busId": null
+    },
+    {
+      "id": 3,
+      "name": "洪紹博",
+      "passcode": "1104",
+      "busId": null
+    },
+    {
+      "id": 4,
+      "name": "林恩丞",
+      "passcode": "0130",
+      "busId": null
+    },
+    {
+      "id": 5,
+      "name": "翁梓翔",
+      "passcode": "0814",
+      "busId": null
+    },
+    {
+      "id": 6,
+      "name": "李榕濠",
+      "passcode": "0126",
+      "busId": null
+    },
+    {
+      "id": 7,
+      "name": "翁仲禹",
+      "passcode": "0505",
+      "busId": null
+    },
+    {
+      "id": 8,
+      "name": "陳孟喬",
+      "passcode": "1126",
+      "busId": null
+    },
+    {
+      "id": 9,
+      "name": "陳以晨",
+      "passcode": "0117",
+      "busId": null
+    },
+    {
+      "id": 10,
+      "name": "林浩平",
+      "passcode": "0916",
+      "busId": null
+    },
+    {
+      "id": 11,
+      "name": "林孟祈",
+      "passcode": "0821",
+      "busId": null
+    },
+    {
+      "id": 12,
+      "name": "林侑辰",
+      "passcode": "0321",
+      "busId": null
+    },
+    {
+      "id": 13,
+      "name": "蕭楷唐",
+      "passcode": "0412",
+      "busId": null
+    },
+    {
+      "id": 14,
+      "name": "陳和謙",
+      "passcode": "1216",
+      "busId": null
+    },
+    {
+      "id": 15,
+      "name": "謝峻翔",
+      "passcode": "1015",
+      "busId": null
+    },
+    {
+      "id": 16,
+      "name": "施亮宇",
+      "passcode": "1226",
+      "busId": null
+    },
+    {
+      "id": 17,
+      "name": "柴沛辰",
+      "passcode": "0420",
+      "busId": null
+    },
+    {
+      "id": 18,
+      "name": "黃良育",
+      "passcode": "0125",
+      "busId": null
+    },
+    {
+      "id": 19,
+      "name": "鄒孟霖",
+      "passcode": "0930",
+      "busId": null
+    },
+    {
+      "id": 20,
+      "name": "李和謙",
+      "passcode": "0824",
+      "busId": null
+    },
+    {
+      "id": 21,
+      "name": "游幃婷",
+      "passcode": "1127",
+      "busId": null
+    },
+    {
+      "id": 22,
+      "name": "陳品慈",
+      "passcode": "0427",
+      "busId": null
+    },
+    {
+      "id": 23,
+      "name": "陳品妤",
+      "passcode": "0211",
+      "busId": null
+    },
+    {
+      "id": 24,
+      "name": "陳宥均",
+      "passcode": "1008",
+      "busId": null
+    },
+    {
+      "id": 25,
+      "name": "葉秉铖",
+      "passcode": "0326",
+      "busId": null
+    },
+    {
+      "id": 26,
+      "name": "赖柏宇",
+      "passcode": "0421",
+      "busId": null
+    },
+    {
+      "id": 27,
+      "name": "盧尹睿",
+      "passcode": "0629",
+      "busId": null
+    },
+    {
+      "id": 28,
+      "name": "游品妤",
+      "passcode": "0219",
+      "busId": null
+    },
+    {
+      "id": 29,
+      "name": "李芷棋",
+      "passcode": "0509",
+      "busId": null
+    },
+    {
+      "id": 30,
+      "name": "林孟緹",
+      "passcode": "0414",
+      "busId": null
+    },
+    {
+      "id": 31,
+      "name": "楊語彤",
+      "passcode": "0823",
+      "busId": null
+    },
+    {
+      "id": 32,
+      "name": "張宴滋",
+      "passcode": "0305",
+      "busId": null
+    },
+    {
+      "id": 33,
+      "name": "林孟鴻",
+      "passcode": "0414",
+      "busId": null
+    },
+    {
+      "id": 34,
+      "name": "謝天心",
+      "passcode": "1215",
+      "busId": null
+    },
+    {
+      "id": 35,
+      "name": "廖奕琁",
+      "passcode": "1212",
+      "busId": null
+    }
+  ],
+  "buses": [
+    {
+      "id": 1,
+      "name": "Bus G",
+      "capacity": 13
+    },
+    {
+      "id": 2,
+      "name": "Bus L",
+      "capacity": 10
+    },
+    {
+      "id": 3,
+      "name": "Bus D",
+      "capacity": 9
+    },
+    {
+      "id": 4,
+      "name": "Bus F",
+      "capacity": 9
+    }
+  ]
+}

@@ -109,6 +109,7 @@ renderStudentButtons();
     }
     const res = await fetch('https://bus-api-kmc2.onrender.com/api/login', {
       method:'POST',
+      credentials: 'include',
       headers:{'Content-Type':'application/json'},
       body: JSON.stringify({ id: selectedStudentId, passcode })
     });
@@ -122,7 +123,9 @@ renderStudentButtons();
 async function loadDashboard() {
   document.getElementById('login').style.display = 'none';
   document.getElementById('dashboard').style.display = '';
-  const { buses, yourBusId } = await (await fetch('https://bus-api-kmc2.onrender.com//api/state')).json();
+  const { buses, yourBusId } = await fetch('https://bus-api-kmc2.onrender.com/api/state', {
+    credentials: 'include'
+  }).then(r => r.json());
   const container = document.getElementById('buses');
   container.innerHTML = '';
   buses.forEach(b => {
@@ -142,7 +145,7 @@ async function loadDashboard() {
 
 window.assign = async busId => {
   const res = await fetch('https://bus-api-kmc2.onrender.com//api/assign', {
-    method:'POST', headers:{'Content-Type':'application/json'},
+    method:'POST', credentials: 'include', headers:{'Content-Type':'application/json'},
     body: JSON.stringify({ busId })
   });
   if (!res.ok) alert((await res.json()).error);

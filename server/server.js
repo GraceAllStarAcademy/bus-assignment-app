@@ -6,44 +6,46 @@ import fs from 'fs/promises';
 
 const app = express();
 
-// —— 1) Trust Render’s proxy so secure cookies work ——
+// 1) Trust Render’s proxy (needed for secure cookies)
 app.set('trust proxy', 1);
 
-// —— 2) CORS: allow your GH Pages origin and cookies ——
+// 2) CORS: allow only your GH Pages origin, and allow cookies
+const FRONTEND = 'https://graceallstaracademy.github.io';
 app.use(cors({
-  origin: 'https://graceallstaracademy.github.io',
+  origin: FRONTEND,
   credentials: true
 }));
-// handle preflight
+// preflight for all routes
 app.options('*', cors({
-  origin: 'https://graceallstaracademy.github.io',
+  origin: FRONTEND,
   credentials: true
 }));
 
-// —— 3) Body parser & session ——
+// 3) Body parser
 app.use(express.json());
+
+// 4) Session (with secure, cross-site cookies)
 app.use(session({
   secret: 'replace-with-strong-key',
   resave: false,
   saveUninitialized: true,
   cookie: {
-    secure: true,     // only over HTTPS
-    sameSite: 'none'  // allow cross-site
+    secure: true,      // HTTPS only
+    sameSite: 'none'   // allow cross-site
   }
 }));
 
 const DATA_FILE = './data.json';
 async function readData() {
-  const txt = await fs.readFile(DATA_FILE, 'utf8');
-  return JSON.parse(txt);
+  return JSON.parse(await fs.readFile(DATA_FILE, 'utf8'));
 }
 async function writeData(data) {
   await fs.writeFile(DATA_FILE, JSON.stringify(data, null, 2));
 }
 
-// —— 4) Endpoints ——
+// —— Your API endpoints —— //
 
-// Login
+// LOGIN
 app.post('/api/login', async (req, res) => {
   const { id, passcode } = req.body;
   const data = await readData();
@@ -53,7 +55,7 @@ app.post('/api/login', async (req, res) => {
   res.json({ success: true });
 });
 
-// State
+// STATE
 app.get('/api/state', async (req, res) => {
   if (!req.session.studentId) return res.status(401).end();
   const data = await readData();
@@ -73,7 +75,7 @@ app.get('/api/state', async (req, res) => {
   });
 });
 
-// Assign
+// ASSIGN
 app.post('/api/assign', async (req, res) => {
   const studentId = req.session.studentId;
   if (!studentId) return res.status(401).end();
@@ -81,8 +83,8 @@ app.post('/api/assign', async (req, res) => {
   const data = await readData();
   const bus = data.buses.find(b => b.id === busId);
   if (!bus) return res.status(400).json({ error: 'No such bus' });
-  const assignedCount = data.students.filter(s => s.busId === busId).length;
-  if (assignedCount >= bus.capacity) return res.status(400).json({ error: 'Bus is full' });
+  const current = data.students.filter(s => s.busId === busId).length;
+  if (current >= bus.capacity) return res.status(400).json({ error: 'Bus is full' });
 
   data.students = data.students.map(s =>
     s.id === studentId ? { ...s, busId } : s
@@ -91,11 +93,10 @@ app.post('/api/assign', async (req, res) => {
   res.json({ success: true });
 });
 
-// // serve static UI
+// (Optional) serve static if you still need it
 // app.use(express.static('public'));
 
-// —— 5) Start up ——
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () =>
-  console.log(`Server listening on port ${PORT}`)
-);
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
+});

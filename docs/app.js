@@ -1,4 +1,5 @@
 // public/app.js
+// const API_BASE = 'http://localhost:3000';
 const API_BASE = 'https://bus-api-kmc2.onrender.com';
 
 // 1) Define your 35 students (id must match data.json)
@@ -46,8 +47,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const loginBtn     = document.getElementById('btnLogin');
   const welcomeEl    = document.getElementById('welcome');
   const errorEl      = document.getElementById('loginError');
+  const logoutBtn     = document.getElementById('btnLogout');
   let selectedStudentId = null;
   let token = localStorage.getItem('token');
+
+  // 0) If you already have a token, show the logout button
+  if (token) {
+    logoutBtn.style.display = '';
+  }
 
   // Group & render student buttons
   function renderStudentButtons() {
@@ -84,6 +91,25 @@ document.addEventListener('DOMContentLoaded', () => {
     errorEl.textContent = '';
   }
 
+  /////////////////////////
+  // LOGOUT HANDLER
+  logoutBtn.onclick = () => {
+    // 1) Clear stored token
+    localStorage.removeItem('token');
+    token = null;
+
+    // 2) Hide dashboard & logout button, show login & reset UI
+    document.getElementById('dashboard').style.display = 'none';
+    document.getElementById('login').style.display = '';
+    logoutBtn.style.display = 'none';
+    document.getElementById('passcode').value = '';
+    selectedStudentId = null;
+    errorEl.textContent = '';
+
+    // 3) Re-render the student buttons in case any selection remains
+    renderStudentButtons();
+  };
+
   loginBtn.onclick = async () => {
     const passcode = document.getElementById('passcode').value;
     if (!selectedStudentId || passcode.length !== 4) {
@@ -99,6 +125,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!res.ok) {
       errorEl.textContent = data.error || 'Login failed';
       return;
+    }
+    if (res.ok) {
+      // after you store token and call loadDashboard():
+      logoutBtn.style.display = '';
     }
     token = data.token;
     localStorage.setItem('token', token);

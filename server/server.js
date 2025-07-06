@@ -92,6 +92,11 @@ app.post('/api/assign', async (req, res) => {
   res.json({ success: true });
 });
 
+app.get('/api/admin/data', async (req, res) => {
+  const data = await readData();
+  res.json(data);   // 🚨 CAREFUL: this returns passcodes too!
+});
+
 // (Optional) serve your static front-end if you still have it here
 // import path from 'path';
 // app.use(express.static(path.resolve(__dirname, '../docs')));

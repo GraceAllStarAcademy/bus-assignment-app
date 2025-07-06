@@ -144,7 +144,7 @@ async function loadDashboard() {
 }
 
 window.assign = async busId => {
-  const res = await fetch('https://bus-api-kmc2.onrender.com//api/assign', {
+  const res = await fetch('https://bus-api-kmc2.onrender.com/api/assign', {
     method:'POST', credentials: 'include', headers:{'Content-Type':'application/json'},
     body: JSON.stringify({ busId })
   });

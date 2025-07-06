@@ -24,8 +24,13 @@ app.options('*', cors({
 app.use(express.json());
 
 // 4) Session (secure + cross-site)
+const SESSION_SECRET = process.env.SESSION_SECRET;
+if (!SESSION_SECRET) {
+  console.error('⚠️  Missing SESSION_SECRET environment variable');
+  process.exit(1);
+}
 app.use(session({
-  secret: 'replace-with-strong-key',
+  secret: SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {

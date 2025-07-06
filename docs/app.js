@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const welcomeEl    = document.getElementById('welcome');
   const errorEl      = document.getElementById('loginError');
   const logoutBtn     = document.getElementById('btnLogout');
+  const loadingIndicator = document.getElementById('loadingIndicator');
   let selectedStudentId = null;
   let token = localStorage.getItem('token');
 
@@ -112,28 +113,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
   loginBtn.onclick = async () => {
     const passcode = document.getElementById('passcode').value;
+    // clear any previous error
+    errorEl.textContent = '';
+
+    // validation
     if (!selectedStudentId || passcode.length !== 4) {
       errorEl.textContent = 'Select your name and enter 4 digits';
       return;
     }
-    const res = await fetch(`${API_BASE}/api/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: selectedStudentId, passcode })
-    });
-    const data = await res.json();
-    if (!res.ok) {
-      errorEl.textContent = data.error || 'Login failed';
-      return;
-    }
-    if (res.ok) {
-      // after you store token and call loadDashboard():
+
+    // show spinner & disable button
+    loadingIndicator.style.display = '';
+    loginBtn.disabled = true;
+
+    try {
+      const res = await fetch(`${API_BASE}/api/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: selectedStudentId, passcode })
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        // show server-error message
+        errorEl.textContent = data.error || 'Login failed';
+        return;
+      }
+
+      // success: store token, show logout button, and go to dashboard
+      token = data.token;
+      localStorage.setItem('token', token);
       logoutBtn.style.display = '';
+      await loadDashboard();
+
+    } catch (err) {
+      // network or unexpected error
+      errorEl.textContent = err.message || 'Login failed';
+    } finally {
+      // hide spinner & re-enable button
+      loadingIndicator.style.display = 'none';
+      loginBtn.disabled = false;
     }
-    token = data.token;
-    localStorage.setItem('token', token);
-    loadDashboard();
   };
+
 
   async function loadDashboard() {
     document.getElementById('login').style.display = 'none';
